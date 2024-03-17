@@ -8,8 +8,8 @@ La clase `http_helper` es la que estará encargada de ser utilizada por el usuar
 La clase `http_base` como lo dice, es practicamente la base, que se enfoca en una funcion en donde todas los tipos de petición que puede realizar `http_helper` recide, esta funcion compilará toda la informacion necesaria para poder realizar una petición, notificará si la peticion fue exitosa o no por medio del try y catch que se ejecuta (Esto se aclara por si se te hace raro ver que te dio un error y la aplicacion no se te atora, es recomendable que actives el modo debug para poder verlo).
 
 Este helper es dependiente de los siguientes paquetes:
-    - http
-    - internet_connection_checker
+    - http *
+    - internet_connection_checker *
     - flutter_secure_storage 
     (Este sirve en dado caso que se necesite autenticacion por token)
 
