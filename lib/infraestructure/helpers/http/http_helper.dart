@@ -1,5 +1,5 @@
 import 'package:primerproyecto/infraestructure/helpers/http/http_base.dart';
-
+export 'http_base.dart';
 class HttpHelper {
   static Future<ReturnHttp?> get({
     required String url,

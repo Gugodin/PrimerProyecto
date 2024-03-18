@@ -15,7 +15,7 @@ enum TypeHTPP { GET, POST, PUT, DELETE }
 enum TypeHTTPErrors { token, common, internetConnection }
 
 // Los headers default de una petición
-Map<String, String> headersDefault = {
+Map<String, String> _headersDefault = {
   'Content-Type': 'application/json',
   'Accept': '*/*',
 };
@@ -26,16 +26,19 @@ Map<String, String> headersDefault = {
 class ReturnHttp {
   TypeHTTPErrors? error;
   String? message;
-  Map? data;
+  Object? data;
   ReturnHttp({
     required this.error,
     required this.message,
     required this.data,
   });
+
+  @override
+  String toString() => 'ReturnHttp(error: $error, message: $message, data: $data)';
 }
 
 /* La funcion de esta clase es para verificar si el usuario
-quiere reemplazar los headersDefault por algunos headers que el mismo
+quiere reemplazar los _headersDefault por algunos headers que el mismo
 necesite*/
 class Headers {
   bool replaceHeaders;
@@ -58,14 +61,14 @@ Future<ReturnHttp> httpBase(
     Headers? headers,
     Map<String, dynamic>? body,
     bool authorization = false}) async {
-  /* Solamente si hay headers extra se agregaran al headersDefault.*/
-  if (headers != null) headersDefault.addAll(headers.headersData);
+  /* Solamente si hay headers extra se agregaran al _headersDefault.*/
+  if (headers != null) _headersDefault.addAll(headers.headersData);
 
   /* Solamente si el parametro replaceHeaders es existe y es true
-  se remplaza los headers por los headersDefault.*/
+  se remplaza los headers por los _headersDefault.*/
   if (headers != null) {
     if (headers.replaceHeaders) {
-      headersDefault = headers.headersData;
+      _headersDefault = headers.headersData;
     }
   }
 
@@ -79,7 +82,7 @@ Future<ReturnHttp> httpBase(
       return ReturnHttp(
           error: TypeHTTPErrors.token, message: 'No existe token en su dispositivo.', data: null);
     }
-    headersDefault['Authorization'] = 'Bearer $token';
+    _headersDefault['Authorization'] = 'Bearer $token';
   }
 
   /* El response se crea solamente para reasignarle el valor una vez
@@ -108,19 +111,19 @@ Future<ReturnHttp> httpBase(
         case TypeHTPP.GET:
           /* La petición GET solamente puede llevar queryparams y headers
           por regla de funciones HTTP*/
-          response = await http.get(url, headers: headersDefault);
+          response = await http.get(url, headers: _headersDefault);
           break;
         case TypeHTPP.POST:
           response = await http.post(url,
-              headers: headersDefault, body: json.encode(body));
+              headers: _headersDefault, body: json.encode(body));
           break;
         case TypeHTPP.PUT:
           response = await http.put(url,
-              headers: headersDefault, body: json.encode(body));
+              headers: _headersDefault, body: json.encode(body));
           break;
         case TypeHTPP.DELETE:
           response = await http.delete(url,
-              headers: headersDefault, body: json.encode(body));
+              headers: _headersDefault, body: json.encode(body));
           break;
         default:
           if (response.statusCode == 200) {
