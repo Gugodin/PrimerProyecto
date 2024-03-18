@@ -34,7 +34,8 @@ class ReturnHttp {
   });
 
   @override
-  String toString() => 'ReturnHttp(error: $error, message: $message, data: $data)';
+  String toString() =>
+      'ReturnHttp(\nerror: $error,\nmessage: $message,\ndata: $data)';
 }
 
 /* La funcion de esta clase es para verificar si el usuario
@@ -80,7 +81,9 @@ Future<ReturnHttp> httpBase(
     String? token = (await storage.read(key: 'tokenAuth'));
     if (token == null) {
       return ReturnHttp(
-          error: TypeHTTPErrors.token, message: 'No existe token en su dispositivo.', data: null);
+          error: TypeHTTPErrors.token,
+          message: 'No existe token en su dispositivo.',
+          data: null);
     }
     _headersDefault['Authorization'] = 'Bearer $token';
   }
@@ -126,16 +129,18 @@ Future<ReturnHttp> httpBase(
               headers: _headersDefault, body: json.encode(body));
           break;
         default:
-          if (response.statusCode == 200) {
-            /* Si la petición fue exitosa, se procede a generar el mapa
+          return ReturnHttp(error: null, message: null, data: null);
+      }
+
+      if (response.statusCode == 200) {
+        /* Si la petición fue exitosa, se procede a generar el mapa
             del body con la data correspondiente*/
-            return ReturnHttp(
-                error: null, message: null, data: json.decode(response.body));
-          } else {
-            /* Si la petición no fue exitosa, se procede a generar una
+        return ReturnHttp(
+            error: null, message: null, data: json.decode(response.body));
+      } else {
+        /* Si la petición no fue exitosa, se procede a generar una
             respuesta con el error asignado a su respectivo statusCode*/
-            return getErrorFromStatusCode(response);
-          }
+        return getErrorFromStatusCode(response);
       }
     } else {
       print('\n\n **** EL DISPOSITIVO NO TIENE INTERNET **** \n\n');
@@ -151,7 +156,6 @@ Future<ReturnHttp> httpBase(
     return ReturnHttp(
         error: TypeHTTPErrors.common, message: e.toString(), data: null);
   }
-  return ReturnHttp(error: null, message: null, data: null);
 }
 
 ReturnHttp getErrorFromStatusCode(http.Response response) {

@@ -19,6 +19,6 @@ class CatAPI implements CatsDataGateWay {
     print('Terminó la peticion');
     print(response);
 
-    throw UnimplementedError();
+    return [];
   }
 }
