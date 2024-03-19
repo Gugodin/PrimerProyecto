@@ -24,7 +24,8 @@ class CatDataModel {
     return CatDataModel(
       id: map['id'] as String,
       imageDescription: ImageDescription.fromMap(map),
-      attributes: CatAttributes.fromMap(map['breeds'] as Map<String,dynamic>),
+      attributes:
+          CatAttributes.fromMap(map['breeds'][0] as Map<String, dynamic>),
     );
   }
 

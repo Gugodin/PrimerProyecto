@@ -12,7 +12,6 @@ class AppProyect extends ConsumerWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      routerConfig: ref.watch(routerProvider),
     );
   }
 }

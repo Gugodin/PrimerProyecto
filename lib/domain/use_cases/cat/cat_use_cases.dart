@@ -8,6 +8,6 @@ class CatDataUseCase {
     required this.catsDataGateWay,
   });
 
-  Future<List<CatDataModel>> getCatsWithLimit(int limit) =>
+  Future<List<CatDataModel>?> getCatsWithLimit(int limit) =>
       catsDataGateWay.getCatsWithLimit(limit);
 }

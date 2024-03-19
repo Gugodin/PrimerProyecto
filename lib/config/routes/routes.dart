@@ -1,10 +1,12 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:auto_route/auto_route.dart';
 
-import '../../ui/ui.dart';
+import 'routes.gr.dart';
 
-final routerProvider = StateProvider<GoRouter>((ref) {
-  return GoRouter(routes: [
-    GoRoute(path: '/', builder: (context, state) => const HomeApp())
-  ]);
-});
+@AutoRouterConfig()
+class AppRouter extends $AppRouter {
+  @override
+  List<AutoRoute> get routes => [
+        /// routes go here
+        AutoRoute(page: HomeApp.page),
+      ];
+}

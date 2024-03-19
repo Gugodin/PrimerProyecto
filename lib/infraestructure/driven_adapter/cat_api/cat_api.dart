@@ -8,7 +8,7 @@ class CatAPI implements CatsDataGateWay {
       'live_YOet9DvL4DTW5kb8GnGg2IRu4lR2wwcudDsC919zFpHsH2Lel4ntTtSkdEDRUd1d';
 
   @override
-  Future<List<CatDataModel>> getCatsWithLimit(int limit) async {
+  Future<List<CatDataModel>?> getCatsWithLimit(int limit) async {
     final response = await HttpHelper.get(
         url: GET_IMAGES_CATS,
         baseUrl: BASE_URL_CATS,
@@ -16,9 +16,14 @@ class CatAPI implements CatsDataGateWay {
         headers: Headers(
             replaceHeaders: false, headersData: {'x-api-key': _apiKey}));
 
-    print('Terminó la peticion');
-    print(response);
+    // print('Terminó la peticion');
+    // print(response!.data);
 
-    return [];
+    if (response == null) {
+      return null;
+    } else {
+      return List<CatDataModel>.generate((response.data as List).length,
+          (index) => CatDataModel.fromMap((response.data as List)[index]));
+    }
   }
 }

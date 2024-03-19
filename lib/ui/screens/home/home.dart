@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:auto_route/auto_route.dart';
 
-import '../../config/providers/provider.dart';
-
+@RoutePage()
 class HomeApp extends ConsumerWidget {
   const HomeApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final cats = ref.watch(catProvider);
-    cats.getCatsWithLimit(5);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
