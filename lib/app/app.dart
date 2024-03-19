@@ -7,11 +7,13 @@ class AppProyect extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final appRouter = AppRouter();
     return MaterialApp.router(
       title: 'Proyect',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      routerConfig: appRouter.config(),
     );
   }
 }
