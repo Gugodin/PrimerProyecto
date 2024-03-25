@@ -8,3 +8,4 @@ import '../../../infraestructure/infraestrucutre.dart';
 final catProvider = Provider<CatDataUseCase>((ref) {
   return CatDataUseCase(catsDataGateWay: CatAPI());
 });
+

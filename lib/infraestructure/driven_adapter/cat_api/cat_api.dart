@@ -9,10 +9,15 @@ class CatAPI implements CatsDataGateWay {
 
   @override
   Future<List<CatDataModel>?> getCatsWithLimit(int limit) async {
+    print('REALIZAMOS PETICIOOOON');
     final response = await HttpHelper.get(
         url: GET_IMAGES_CATS,
         baseUrl: BASE_URL_CATS,
-        queryParameters: {'has_breeds': '1', 'limit': limit.toString()},
+        queryParameters: {
+          'has_breeds': '1',
+          'limit': limit.toString(),
+          'mime_types': 'png'
+        },
         headers: Headers(
             replaceHeaders: false, headersData: {'x-api-key': _apiKey}));
 

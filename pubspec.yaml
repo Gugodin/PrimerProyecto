@@ -18,6 +18,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   flutter_secure_storage: ^9.0.0
   auto_route:
+  cached_network_image: ^3.3.1
 
 dev_dependencies:
   flutter_test:
@@ -28,3 +29,8 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  # LOCAL ASSETS
+  assets:
+    - 'assets/fonts/'
+    - 'assets/images/'
+    - 'assets/icons/'
